@@ -2,16 +2,20 @@ import random
 
 def count_point(deck):
   points = 0
+  ace_n = 0
   for i in deck:
     if i in ["J","Q","K"]:
       points += 10
     elif i == "A":
-      if points + 11 > 21:
-        points += 1
-      else:
-        points += 11
+      ace_n += 1
     else:
       points += i
+
+  if ace_n > 0:
+    if points + 11 + (ace_n - 1) > 21:
+      points = points + 1 + (ace_n - 1)
+    else:
+      points = points + 11 + (ace_n - 1)
   return points
 
 def add_card(player_deck):
