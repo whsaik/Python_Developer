@@ -1,5 +1,4 @@
 ############### Blackjack Project #####################
-import random
 from art import logo
 import bj_function
 ############### Our Blackjack House Rules #####################
@@ -45,9 +44,9 @@ while True:
     print("BOOOOOM!!!!!!!\nBUSTED!!!\nYOU LOSE")
     break
 
-if score < 21:  
+if score <= 21:  
   # get extra card for dealer if it has small points
-  while bj_function.count_point(h_deck) < 19 and len(h_deck) < 5 and bj_function.count_point(h_deck) <= score:
+  while bj_function.count_point(h_deck) < 19 and len(h_deck) < 5 and bj_function.count_point(h_deck) < score:
     bj_function.add_card(h_deck)
   
   # check the winner
