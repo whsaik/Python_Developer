@@ -5,3 +5,6 @@
 
 ## 100 Days of Codes
 ### Daily practise of python programming for 100 days, generate one project for each day of practice
+
+## Others
+* Data Scraping from web
