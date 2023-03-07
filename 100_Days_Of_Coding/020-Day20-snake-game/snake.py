@@ -39,6 +39,15 @@ class Snake:
         # head of the snake will move forward
         self.head.forward(MOVE_DISTANCE)
 
+    def reset_game(self):
+        for seg in self.snake_body:
+            seg.hideturtle()
+        self.snake_body.clear()
+        self.create_snake()
+        self.head = self.snake_body[0]
+        
+    
+    
     def left(self):
         if self.head.heading() != RIGHT:
             self.head.setheading(LEFT)

@@ -17,6 +17,7 @@ scoreboard = Scoreboard()
 
 game_is_on = True
 
+
 # control the movement of the snake
 while game_is_on:
     screen.update()  # turn on the tracer for once to show the current state of the snake
@@ -42,15 +43,16 @@ while game_is_on:
             snake.extend()
 
     # Detect collision with the wall
-    if snake.head.xcor() > 280 or snake.head.xcor() < -280 or snake.head.ycor() > 280 or snake.head.ycor() < -280:
-        game_is_on = False
-        scoreboard.game_over()
+    if snake.head.xcor() > 280 or snake.head.xcor() < -280 or \
+        snake.head.ycor() > 280 or snake.head.ycor() < -280:
+        snake.reset_game()
+        scoreboard.reset_game()
 
     # Detect collision with the tail
     for seg in snake.snake_body[1:]:
         if snake.head.distance(seg) < 10:
-            game_is_on = False
-            scoreboard.game_over()
+            snake.reset_game()
+            scoreboard.reset_game()
 
 
 
