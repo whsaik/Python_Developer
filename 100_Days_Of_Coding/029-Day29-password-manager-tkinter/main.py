@@ -2,6 +2,23 @@ from tkinter import *
 from tkinter import messagebox
 from password_generator import password_generator
 import pyperclip
+import json
+
+# ---------------------------- PASSWORD SEARCH ------------------------------- #
+def pass_search():
+    web = web_input.get()
+    try:
+        with open("data.json", "r") as file:
+            data = json.load(file)
+            if web in data:
+                messagebox.showinfo(title=web, message=f"Email: {data[web]['Email']}\n"
+                                        f"Password: {data[web]['Password']}")
+            else:
+                messagebox.showinfo(title=web, message=f"Password not found.")
+                
+    except FileNotFoundError:
+        messagebox.showinfo(title="Error", message=f"No password saved!!!")
+
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
 def pass_gen():
     password = password_generator()
@@ -18,12 +35,24 @@ def add_pass():
         messagebox.showinfo(title="Attention!!!", message="Please don't leave any field empty.\nThank you.")
     
     else:
+        new_data = {web:{"Email":mail, "Password": password}}
+        
         Is_ok = messagebox.askokcancel(title=web, message=f"These are the details entered\nEmail: {mail}\n"
                                    f"Password: {password}\nIs it ok to save?")
         
         if Is_ok:
-            with open('data.txt', "a") as file:
-                file.write(f'{web} | {mail} | {password}\n')
+            try:
+                with open('data.json', "r") as file:
+                    data = json.load(file)
+                    data.update(new_data)
+            
+            except FileNotFoundError:
+                data = new_data  
+            
+            finally:
+                with open('data.json', "w") as file:
+                    json.dump(data, file, indent=4)
+                    
                 web_input.delete(0, END)
                 pass_input.delete(0, END)
                 web_input.focus()
@@ -53,8 +82,8 @@ pass_label.grid(column=0, row=3)
 pass_label.config(padx=2,pady=2)
 
 # User entry/ input
-web_input = Entry(width=55)
-web_input.grid(column=1, row=1, columnspan=2)
+web_input = Entry(width=36)
+web_input.grid(column=1, row=1)
 web_input.focus()
 
 user_input = Entry(width=55)
@@ -71,5 +100,9 @@ generate_button.grid(column=2, row=3)
 add_button = Button(text="Add", width=46, command=add_pass)
 add_button.grid(column=1, row=4, columnspan=2)
 add_button.config(padx=2, pady=2)
+
+search_button = Button(text="Search", width=14, command=pass_search)
+search_button.grid(column=2, row=1)
+search_button.config(padx=2, pady=2)
 
 window.mainloop()
