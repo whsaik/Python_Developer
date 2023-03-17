@@ -4,9 +4,9 @@ import random
 
 DAY_OF_WEEK = ['MONDAY', "TUESDAY", "WEDNESDAY", 'THURSDAY', 'FRIDAY', 'SATURDAY', 'SUNDAY']
 
-y_mail = "valaschool@yahoo.com"
-g_mail = "happyelaerning0326@gmail.com"
-g_pass = "ntalfdlxlpqyudaf"
+y_mail = "receiver@yahoo.com"
+g_mail = "sender@gmail.com"
+g_pass = "app_password"
 
 def send_mail(day, msg_quote, msg_quote_author):
     with smtplib.SMTP("smtp.gmail.com", 587) as connection:
