@@ -22,10 +22,10 @@ def send_mail():
     text = "Subject:ISS is near\n\nLook up the sky, ISS is near your location."    
     with smtplib.SMTP("smtp.gmail.com", 587) as connection:
         connection.starttls()
-        connection.login(user='happyelaerning0326@gmail.com', password='ntalfdlxlpqyudaf')
+        connection.login(user='sender_mail', password='sender_pass')
         connection.sendmail(
-            from_addr='happyelaerning0326@gmail.com',
-            to_addrs='valaschool@yahoo.com',
+            from_addr='sender_mail',
+            to_addrs='receiver_mail',
             msg=text
         )
 
