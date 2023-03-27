@@ -7,15 +7,23 @@ BEARER_HEADERS = {'Authorization': f'Bearer {TOKEN}'}
 class DataManager:
     #This class is responsible for talking to the Google Sheet.    
     def get_destination_data(self):
-        sheet_endpoint = 'https://api.sheety.co/---'
+        sheet_endpoint = '---'
 
         response = requests.get(url=sheet_endpoint, headers=BEARER_HEADERS)
         response.raise_for_status()
         sheet_data = response.json()['prices']
         return sheet_data
+    
+    def get_customer_data(self):
+        sheet_endpoint = '---'
+
+        response = requests.get(url=sheet_endpoint, headers=BEARER_HEADERS)
+        response.raise_for_status()
+        sheet_data = response.json()['users']
+        return sheet_data
         
     def update_flight(self, data):
-        sheet_put_api = "https://api.sheety.co/---"
+        sheet_put_api = '---'
         
         for x in data:
             sheety_data = {
